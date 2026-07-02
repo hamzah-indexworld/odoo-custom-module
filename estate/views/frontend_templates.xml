@@ -1,0 +1,23 @@
+<odoo>
+    <!-- We target Odoo's website layout to keep the standard header/footer -->
+    <template id="property_list_template" name="Our Properties">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h1>Available Properties</h1>
+                <div class="row">
+                    <!-- Loop through the properties sent by the controller -->
+                    <t t-foreach="properties" t-as="prop">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><t t-esc="prop.name"/></h5>
+                                    <p class="card-text">Expected Price: $<t t-esc="prop.expected_price"/></p>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

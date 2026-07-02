@@ -1,0 +1,25 @@
+<odoo>
+    <template id="portal_my_properties_template" name="My Properties">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <h3>My Real Estate Properties</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Property Name</th>
+                            <th>Expected Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="properties" t-as="prop">
+                            <tr>
+                               <td><t t-esc="prop.name"/></td>
+                               <td><t t-esc="prop.expected_price"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,45 @@
+<odoo>
+
+
+    <!--register estate actions  -->
+    <record id="estate_property_view" model="ir.actions.act_window">
+        <field name="name">estate property view</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_filter_available': 1}</field>
+    </record>
+
+    <!--  register property type actions  -->
+    <record id="estate_property_type_view" model="ir.actions.act_window">
+        <field name="name">Property Type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!--  register property offer actions  -->
+    <record id="estate_property_offer_view" model="ir.actions.act_window">
+        <field name="name">Property Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list</field>
+    </record>
+
+
+
+
+<!--    creating estate menus-->
+<menuitem id="estate_menu_root" name="Estate">
+<!--    topbar -->
+    <menuitem id="estate_menu_topbar" name="Advertisement">
+        <menuitem id="estate_menu_action" action="estate_property_view"/>
+    </menuitem>
+
+<!--    topbar -->
+    <menuitem id="property_type_topbar" name="Settings">
+        <menuitem id="property_type_menu_action" action="estate_property_type_view" />
+        <menuitem id="property_offer_menu_action" action="estate_property_offer_view" />
+    </menuitem>
+
+</menuitem>
+
+
+</odoo>

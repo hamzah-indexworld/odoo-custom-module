@@ -1,0 +1,151 @@
+
+<odoo>
+
+
+
+<!-- List View -->
+    <record id="estate_property_view_list" model="ir.ui.view">
+        <field name="name">estate.property.list</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <list string="All Properties">
+<!--                <field name="sequence" widget="handle"/>-->
+                <field name="name"/>
+                <field name="state"/>
+                <field name="date_availability" optional="hide"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <field name="bedrooms" optional="show"/>
+                <field name="living_area"/>
+                <field name="facades"/>
+                <field name="garage"/>
+                <field name="garden"/>
+                <field name="postcode"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <button name="action_sold_property" type="object" string="SOLD" invisible="state in ['sold', 'cancelled']" />
+                    <button name="action_cancel_property" type="object" string="CANCEL" invisible="state in ['sold', 'cancelled']" />
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Property Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Cozy Suburban House"/>
+                        </h1>
+                        <!-- Property Tags placed right below the Title -->
+                        <div class="mt-2">
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="Add tags..."/>
+                        </div>
+                    </div>
+
+                    <group string="General Info">
+                        <group>
+<!--                            <field name="name"/>-->
+                            <field name="state" />
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                            <field name="best_offer"/>
+
+                        </group>
+                        <group>
+                            <field name="bedrooms"/>
+                            <field name="garden"/>
+                            <field name="state"/>
+                            <field name="property_type_id" options="{'no_create': True, 'no_edit': True}" />
+
+                        </group>
+                    </group>
+
+                    <group string="Garden Info">
+                        <field name="garden_area" invisible="not garden"/>
+                        <field name="living_area"/>
+                        <field name="total_area"/>
+                        <field name="garden_orientation" invisible="not garden"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description"/>
+                            </group>
+
+                        </page>
+                         <page string="Other Info">
+                            <group>
+                                <field name="buyer_id"/>
+                                <field name="salesperson_id"/>
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids" readonly="state in ['offer_accepted', 'sold', 'cancelled']">
+                                <list delete="0">
+                                    <field name="buyer_id"/>
+                                    <field name="price"/>
+                                    <button name="action_accept_property_offer" type="object" icon="fa-check" title="accept" />
+                                    <button name="action_reject_property_offer" type="object" icon="oi-close" title="decline" />
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+<!-- Search View -->
+<record id="estate_property_view_search" model="ir.ui.view">
+    <field name="name">estate.property.search</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+        <search>
+
+            <!-- Search Fields -->
+            <field name="name" string="Property Name"/>
+            <field name="postcode"/>
+            <field name="expected_price"/>
+            <field name="bedrooms"/>
+
+            <!-- Filters -->
+            <filter name="garden" string="Has Garden" domain="[('garden', '=', True)]"/>
+            <filter name="garage" string="Has Garage" domain="[('garage', '=', True)]"/>
+<!--             <field name="living_area" filter_domain="[('living_area', '&gt;=', self)]"/>-->
+            <!-- Example search view lookup -->
+<!--            <filter string="Available" name="filter_available" domain="[('state', 'in', ['new', 'offer_received'])]"/>-->
+
+
+            <!-- Group By -->
+
+            <filter name="group_by_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
+            <filter name="group_by_garden_orientation" string="Garden Orientation" context="{'group_by': 'garden_orientation'}"/>
+
+
+        </search>
+    </field>
+</record>
+
+
+
+
+
+
+
+
+
+</odoo>

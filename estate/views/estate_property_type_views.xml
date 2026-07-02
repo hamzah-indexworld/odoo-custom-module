@@ -1,0 +1,64 @@
+<odoo>
+
+<!--    list view -->
+    <record id="property_type_list_view" model="ir.ui.view">
+        <field name="name">property.type.list</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="offer_count" />
+                <field name="offer_ids" />
+                <field name="property_ids" />
+            </list>
+        </field>
+    </record>
+
+<!-- form view -->
+    <record id="property_type_form_view" model="ir.ui.view">
+        <field name="name">property.type.form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="Property Type">
+                <sheet>
+                    <!-- Smart Button Area Container Box -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(estate.estate_property_offer_view)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-money">
+                            <field name="offer_count" widget="statinfo" string="Offers"/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <field name="name" string="Property Type Name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+<!--    property offer list view-->
+
+<record id="estate_property_offer_view_list" model="ir.ui.view">
+    <field name="name">estate.property.offer.list</field>
+    <field name="model">estate.property.offer</field>
+    <field name="arch" type="xml">
+        <list string="All Properties" editable="bottom">
+            <field name="property_id"/>
+            <field name="buyer_id"/>
+            <field name="price"/>
+            <field name="status"/>
+
+        </list>
+    </field>
+</record>
+
+
+
+
+
+</odoo>
