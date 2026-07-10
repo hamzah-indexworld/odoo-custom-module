@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="view_hospital_staff_nurse_list" model="ir.ui.view">
+        <field name="name">hospital.staff.nurse.list</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="specialization"/>
+                <field name="phone"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="view_hospital_staff_nurse_form" model="ir.ui.view">
+        <field name="name">hospital.staff.nurse.form</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="specialization"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+</odoo>

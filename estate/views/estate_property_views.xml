@@ -32,6 +32,7 @@
         <field name="arch" type="xml">
             <form create="0">
                 <header>
+                    <button name="action_test_print" type="object" string="debug code" />
                     <button name="action_sold_property" type="object" string="SOLD" invisible="state in ['sold', 'cancelled']" />
                     <button name="action_cancel_property" type="object" string="CANCEL" invisible="state in ['sold', 'cancelled']" />
                     <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"/>
@@ -139,8 +140,6 @@
         </search>
     </field>
 </record>
-
-
 
 
 

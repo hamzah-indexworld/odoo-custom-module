@@ -1,5 +1,15 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError, ValidationError
+import logging
+import pprint
+
+
+
+# Initialize the logger at the top of your python file
+_logger = logging.getLogger(__name__)
+
+
+
 
 
 class EstateProperty(models.Model):
@@ -40,6 +50,8 @@ class EstateProperty(models.Model):
     active = fields.Boolean(default=True)
     total_area = fields.Integer(string="Total Area", compute='_compute_total_area')
     best_offer = fields.Float(string='Best Offer', compute='_compute_best_offer')
+    # Ensure this field exists! Odoo needs it for the statinfo widget
+    offer_count = fields.Integer(compute="_compute_offer_count", string="Offer Count")
 
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
     buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
@@ -47,6 +59,14 @@ class EstateProperty(models.Model):
     tag_ids = fields.Many2many('estate.property.tags', string='Tags')
     # offer_ids = fields.One2many('estate.property.offer', string='Offers')
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offers', ondelete='cascade')
+
+
+
+    @api.depends('offer_ids')
+    def _compute_offer_count(self):
+        for record in self:
+            record.offer_count = len(record.offer_ids)
+
 
 
     @api.depends('living_area', 'garden_area')
@@ -115,3 +135,30 @@ class EstateProperty(models.Model):
             if record.selling_price < required_price:
                 raise ValidationError('selling_price must be greater than 90% of expected_price')
         return True
+
+
+    def action_mass_approve(self):
+        for record in self:
+            if record.state == 'new':
+                record.state = 'offer_received'
+            else:
+                pass
+        return True
+
+    def action_test_print(self):
+
+        # Different logging levels you can use:
+        # _logger.info("--- Testing property tracking ---")
+        # _logger.warning(f"Property name is: {self.name}")
+        # _logger.error(f"Total Offers: {len(self.offer_ids)}")
+
+        # This stops execution and pops up an alert box with your data
+        # raise UserError(f"Testing values: Name={self.name}, Price={self.expected_price}")
+
+        # breakpoint()
+
+        # Check your terminal: it will turn into a PDB (Python Debugger) shell.
+        # You can type 'self', 'my_variable', or 'self.offer_ids' to inspect them.
+        # Type 'c' and hit enter to resume Odoo.
+
+        return False

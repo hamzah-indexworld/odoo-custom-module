@@ -1,0 +1,47 @@
+<odoo>
+
+
+
+    <!--register estate actions  -->
+    <record id="estate_property_view" model="ir.actions.act_window">
+        <field name="name">estate property view</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_filter_available': 1}</field>
+    </record>
+
+    <!--  register property type actions  -->
+    <record id="estate_property_type_view" model="ir.actions.act_window">
+        <field name="name">Property Type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!--  register property offer actions  -->
+    <record id="estate_property_offer_view" model="ir.actions.act_window">
+        <field name="name">Property Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list</field>
+    </record>
+
+
+
+<!--  register server action for estate.property-->
+
+<record id="action_server_approve_properties" model="ir.actions.server">
+    <field name="name">Mass Approve Properties</field>
+    <field name="model_id" ref="model_estate_property"/>
+    <field name="binding_model_id" ref="model_estate_property"/>
+    <field name="binding_type">action</field>
+    <field name="state">code</field>
+    <field name="code">
+        records.action_mass_approve()
+    </field>
+</record>
+
+
+
+
+
+
+</odoo>

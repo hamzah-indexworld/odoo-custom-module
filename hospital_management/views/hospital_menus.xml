@@ -1,0 +1,15 @@
+<odoo>
+
+    <menuitem id="hospital_root_menu" name="Hospital" />
+<!--    <menuitem id="hospital_doctor_menu" name="Doctor" parent="hospital_root_menu" action="action_hospital_doctor_menu" />-->
+    <menuitem id="hospital_patient_menu" name="Patient" parent="hospital_root_menu" action="action_hospital_patient_menu" />
+
+    <menuitem id="hospital_slot_menu" name="Slots" parent="hospital_root_menu" action="action_hospital_slot_menu" groups="hospital_management.group_hospital_manager" />
+<!--    <menuitem id="hospital_weekday_menu" name="Weekday" parent="hospital_root_menu" action="action_hospital_weekday_menu" groups="hospital_management.group_hospital_manager" />-->
+
+    <menuitem id="hospital_staff_menu" name="Staff" parent="hospital_root_menu" />
+    <menuitem id="hospital_staff_doctor_menu" name="Doctor Menu" parent="hospital_staff_menu" action="action_hospital_staff_doctor_menu" />
+    <menuitem id="hospital_staff_nurse_menu" name="Nurse Menu" parent="hospital_staff_menu" action="action_hospital_staff_nurse_menu"  />
+
+
+</odoo>

@@ -1,0 +1,73 @@
+<odoo>
+
+    <record id="view_hospital_patient_list" model="ir.ui.view">
+        <field name="name">hospital.patient.list</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="age" />
+                <field name="blood_group" />
+            </list>
+        </field>
+    </record>
+
+
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="age" />
+                            <field name="blood_group" />
+                        </group>
+                        <group string="Select Doctor">
+                            <field name="selected_doctor_id" options="{'no_open':True}" />
+                        </group>
+                    </group>
+
+
+                    <notebook>
+                        <page string="Available Slots">
+                            <field name="available_slot_ids" context="{'current_patient_id': id}" >
+                                <list editable="bottom">
+                                    <field name="doctor_id" readonly="1"/>
+                                    <field name="specialization" readonly="1"/>
+                                    <field name="slot_date" readonly="1"/>
+                                    <field name="start_time" readonly="1" widget="float_time"/>
+                                    <field name="end_time" readonly="1" widget="float_time"/>
+                                    <button name="action_book_slot" string="Book slot" type="object" class="btn-primary" groups="hospital_management.group_hospital_manager" invisible="status == 'booked'"/>
+<!--                                    <field name="patient_id" />-->
+                                    <field name="status" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Your Booked Slots">
+                            <field name="slot_ids">
+                                <list editable="bottom" edit="0" create="0" delete="0" >
+                                    <field name="doctor_id" />
+                                    <field name="specialization" />
+                                    <field name="slot_date" />
+                                    <field name="start_time" widget="float_time"/>
+                                    <field name="end_time" widget="float_time" />
+<!--                                    <field name="patient_id" />-->
+                                    <field name="status" />
+                                </list>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <chatter/>
+
+            </form>
+        </field>
+    </record>
+
+
+</odoo>
